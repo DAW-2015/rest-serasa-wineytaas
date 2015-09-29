@@ -1,7 +1,9 @@
 <?php
 require 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
+
 require 'clienteDAO.php';
+require 'estadoDAO.php';
 
 $app = new \Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
@@ -43,6 +45,52 @@ $app->put('/clientes/:id', function ($id) {
 $app->delete('/clientes/:id', function($id) {
   // exclui o cliente
   $isDeleted = ClienteDAO::deleteCliente($id);
+
+  // verifica se houve problema na exclusão
+  if ($isDeleted) {
+    echo "{'message':'Produto excluído'}";
+  } else {
+    echo "{'message':'Erro ao excluir produto'}";
+  }
+});
+
+$app->get('/estados/:id', function ($id) {
+  //recupera o estado
+  $estado = EstadoDAO::getEstadoByID($id);
+  echo json_encode($estado);
+});
+
+$app->get('/estados', function() {
+  // recupera todos os estados
+  $estados = EstadoDAO::getAll();
+  echo json_encode($estados);
+});
+
+$app->post('/estados', function() {
+  // recupera o request
+  $request = \Slim\Slim::getInstance()->request();
+
+  // insere o estado
+  $novoEstado = json_decode($request->getBody());
+  $novoEstado = ClienteDAO::addCliente($novoEstado);
+
+  echo json_encode($novoEstado);
+});
+
+$app->put('/estados/:id', function ($id) {
+  // recupera o request
+  $request = \Slim\Slim::getInstance()->request();
+
+  // atualiza o estado
+  $estado = json_decode($request->getBody());
+  $estado = ClienteDAO::updateCliente($estado, $id);
+
+   echo json_encode($estado);
+});
+
+$app->delete('/estados/:id', function($id) {
+  // exclui o estado
+  $isDeleted = EstadoDAO::deleteEstado($id);
 
   // verifica se houve problema na exclusão
   if ($isDeleted) {
