@@ -34,7 +34,7 @@ class EstadoDAO
 
   public static function updateEstado($estado, $id) {
     $connection = Connection::getConnection();
-    $sql = "UPDATE clientes SET nome='$estado->nome' WHERE id=$id";
+    $sql = "UPDATE estados SET nome='$estado->nome' WHERE id=$id";
     $result  = mysqli_query($connection, $sql);
 
     $estadoAtualizado = EstadoDAO::getEstadoByID($estado->id);
