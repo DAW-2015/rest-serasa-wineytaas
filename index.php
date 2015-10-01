@@ -108,4 +108,57 @@ $app->delete('/estados/:id', function($id) {
     }
 });
 
+//----------------------CIDADES---------------------------------
+
+$app->get('/cidades/:id', function ($id) {
+    //recupera o cidade
+    $cidade = CidadeDAO::getCidadeByID($id);
+    echo json_encode($cidade);
+});
+
+$app->get('/cidades', function() {
+    // recupera todos os cidades
+    $cidades = CidadeDAO::getAll();
+    echo json_encode($cidades);
+});
+
+$app->post('/cidades', function() {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // insere o cidade
+    $novoCidade = json_decode($request->getBody());
+    $isAdd = CidadeDAO::addCidade($novoCidade);
+    
+    if ($isAdd) {
+        echo "{'message':'Cidade Adicionado'}";
+    } else {
+        echo "{'message':'Erro ao adicionar cidade'}";
+    }
+});
+
+$app->put('/cidades/:id', function ($id) {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // atualiza o cidade
+    $cidade = json_decode($request->getBody());
+    $cidade = CidadeDAO::updateCidade($cidade, $id);
+
+    echo json_encode($cidade);
+});
+
+$app->delete('/cidades/:id', function($id) {
+    // exclui o cidade
+    $isDeleted = CidadeDAO::deleteCidade($id);
+
+    // verifica se houve problema na exclusão
+    if ($isDeleted) {
+        echo "{'message':'Cidade excluído'}";
+    } else {
+        echo "{'message':'Erro ao excluir cidade'}";
+    }
+});
+
+
 $app->run();
