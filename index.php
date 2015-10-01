@@ -72,7 +72,7 @@ $app->post('/estados', function() {
 
   // insere o estado
   $novoEstado = json_decode($request->getBody());
-  $novoEstado = ClienteDAO::addCliente($novoEstado);
+  $novoEstado = EstadoDAO::addEstado($novoEstado);
 
   echo json_encode($novoEstado);
 });
@@ -83,7 +83,7 @@ $app->put('/estados/:id', function ($id) {
 
   // atualiza o estado
   $estado = json_decode($request->getBody());
-  $estado = ClienteDAO::updateCliente($estado, $id);
+  $estado = EstadoDAO::updateEstado($estado, $id);
 
    echo json_encode($estado);
 });
