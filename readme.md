@@ -5,7 +5,9 @@
     2. elementos {id,nome}
 
 2.  `GET /estados/:id`
-    1. return: O id e o nome do estado selecionado
+    1. parametro: **id** do estado desejado
+    3. body: NULL
+    2. return: O **id** e o **nome** do estado selecionado
 
 3.  `GET /estados`
     1. return: Lista de estados
