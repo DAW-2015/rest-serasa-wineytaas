@@ -1,7 +1,7 @@
 <?php
 require 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
-
+require 'connection.php';
 require 'clienteDAO.php';
 require 'estadoDAO.php';
 
