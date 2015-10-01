@@ -85,4 +85,32 @@
     1. parametro: **id** do cliente desejado
     2. body: NULL
     3. return: **Cliente excluído**, caso true. **Erro ao excluir cliente**, case false
+
+##Estabelecimento
+
+
+1.  `GET /estabelecimentos/:cpf`
+    1. parametro: **id** do estabelecimento desejado
+    2. body: NULL
+    3. return: Os dados do estabelecimento **id** , **nome** , **cidade** (**id** , **nome**, **estados_id** )
+
+2.  `GET /estabelecimentos`
+    1. parametro: NULL
+    2. body: NULL
+    3. return: Os dados de todos os clientes **id** , **nome** , **cidade** (**id** , **nome**, **estados_id** )
+
+3.  `POST /estabelecimentos`
+    1. parametro: NULL
+    2. body: { "nome": "NOME_ESTABELECIMENTO", "cidades_id":"CIDADE_ID_ESTABELECIMENTO" }
+    3. return: **Estabelecimento Adicionado**, true. **Erro ao adicionar estabelecimento**, false.
+
+4.  `PUT /estabelecimentos/:id`
+    1. parametro: **id** do cliente desejado
+    2. body: { "cpf": "CPF_CLIENETE", "nome": "NOME_CLIENTE", "cidades_id":"CIDADE_ID_CLIENTE" }
+    3. return:  Os dados do estabelecimento que foi atualizado **id** , **nome** , **cidade** (**id** , **nome**, **estados_id** )
+
+5.  `DELETE /estabelecimentos/:id`
+    1. parametro: **id** do cliente desejado
+    2. body: NULL
+    3. return: **Cliente excluído**, caso true. **Erro ao excluir cliente**, case false
     

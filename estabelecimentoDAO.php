@@ -10,7 +10,7 @@ class estabelecimentoDAO {
 
         $sql = "SELECT * FROM serasa_cidades WHERE id=$estabelecimento->cidades_id";
         $result = mysqli_query($connection, $sql);
-        $estabelecimento->nome_cidade = mysqli_fetch_object($result)->nome;
+        $estabelecimento->cidade = mysqli_fetch_object($result);
 
         return $estabelecimento;
     }
@@ -25,8 +25,8 @@ class estabelecimentoDAO {
         while ($estabelecimento = mysqli_fetch_object($result)) {
             if ($estabelecimento != null) {
                 $sql = "SELECT * FROM serasa_cidades WHERE id=$estabelecimento->cidades_id";
-                $result = mysqli_query($connection, $sql);
-                $estabelecimento->nome_cidade = mysqli_fetch_object($result)->nome;
+                $c = mysqli_query($connection, $sql);
+                $estabelecimento->cidade = mysqli_fetch_object($c);
                 $estabelecimentos[] = $estabelecimento;
             }
         }
@@ -35,7 +35,7 @@ class estabelecimentoDAO {
 
     public static function updateEstabelecimento($estabelecimento, $id) {
         $connection = Connection::getConnection();
-        $sql = "UPDATE serasa_estabelecimentos SET nome='$estabelecimento->nome', estado_id='$estabelecimento->cidades_id' WHERE id=$id";
+        $sql = "UPDATE serasa_estabelecimentos SET nome='$estabelecimento->nome', cidades_id='$estabelecimento->cidades_id' WHERE id=$id";
         $result = mysqli_query($connection, $sql);
 
         $estabelecimentoAtualizado = EstabelecimentoDAO::getEstabelecimentoByID($id);

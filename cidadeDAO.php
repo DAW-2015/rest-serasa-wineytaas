@@ -8,7 +8,7 @@ class CidadeDAO {
         $result = mysqli_query($connection, $sql);
         $cidade = mysqli_fetch_object($result);
 
-        $sql = "SELECT * FROM serasa_estados WHERE id=$cidade->estados_id";
+        $e = "SELECT * FROM serasa_estados WHERE id=$cidade->estados_id";
         $result = mysqli_query($connection, $sql);
         $cidade->nome_estado = mysqli_fetch_object($result)->nome;
 
@@ -25,8 +25,8 @@ class CidadeDAO {
         while ($cidade = mysqli_fetch_object($result)) {
             if ($cidade != null) {
                 $sql = "SELECT * FROM serasa_estados WHERE id=$cidade->estados_id";
-                $result = mysqli_query($connection, $sql);
-                $cidade->nome_estado = mysqli_fetch_object($result)->nome;
+                $e = mysqli_query($connection, $sql);
+                $cidade->nome_estado = mysqli_fetch_object($e)->nome;
                 $cidades[] = $cidade;
             }
         }
