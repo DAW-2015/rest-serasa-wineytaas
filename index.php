@@ -162,4 +162,57 @@ $app->delete('/cidades/:id', function($id) {
 });
 
 
+//----------------------ESTABELECIMENTOS---------------------------------
+
+$app->get('/estabelecimentos/:id', function ($id) {
+    //recupera o -=
+    $estabelecimento = EstabelecimentoDAO::getEstabelecimentoByID($id);
+    echo json_encode($estabelecimento);
+});
+
+$app->get('/estabelecimentos', function() {
+    // recupera todos os estabelecimentos
+    $estabelecimentos = EstabelecimentoDAO::getAll();
+    echo json_encode($estabelecimentos);
+});
+
+$app->post('/estabelecimentos', function() {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // insere o estabelecimento
+    $novoEstabelecimento = json_decode($request->getBody());
+    $isAdd = EstabelecimentoDAO::addEstabelecimento($novoEstabelecimento);
+    
+    if ($isAdd) {
+        echo "{'message':'Estabelecimento Adicionado'}";
+    } else {
+        echo "{'message':'Erro ao adicionar estabelecimento'}";
+    }
+});
+
+$app->put('/estabelecimentos/:id', function ($id) {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // atualiza o estabelecimento
+    $estabelecimento = json_decode($request->getBody());
+    $estabelecimento = EstabelecimentoDAO::updateEstabelecimento($estabelecimento, $id);
+
+    echo json_encode($estabelecimento);
+});
+
+$app->delete('/estabelecimentos/:id', function($id) {
+    // exclui o estabelecimento
+    $isDeleted = EstabelecimentoDAO::deleteEstabelecimento($id);
+
+    // verifica se houve problema na exclusão
+    if ($isDeleted) {
+        echo "{'message':'Estabelecimento excluído'}";
+    } else {
+        echo "{'message':'Erro ao excluir estabelecimento'}";
+    }
+});
+
+
 $app->run();

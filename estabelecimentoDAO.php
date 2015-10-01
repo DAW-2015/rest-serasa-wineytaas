@@ -33,16 +33,16 @@ class estabelecimentoDAO {
         return $estabelecimentos;
     }
 
-    public static function updateCidade($estabelecimento, $id) {
+    public static function updateEstabelecimento($estabelecimento, $id) {
         $connection = Connection::getConnection();
         $sql = "UPDATE serasa_estabelecimentos SET nome='$estabelecimento->nome', estado_id='$estabelecimento->cidades_id' WHERE id=$id";
         $result = mysqli_query($connection, $sql);
 
-        $estabelecimentoAtualizado = CidadeDAO::getCidadeByID($id);
+        $estabelecimentoAtualizado = EstabelecimentoDAO::getEstabelecimentoByID($id);
         return $estabelecimentoAtualizado;
     }
 
-    public static function deleteCidade($id) {
+    public static function deleteEstabelecimento($id) {
         $connection = Connection::getConnection();
         $sql = "DELETE FROM serasa_estabelecimentos WHERE id=$id";
         $result = mysqli_query($connection, $sql);
@@ -54,7 +54,7 @@ class estabelecimentoDAO {
         }
     }
 
-    public static function addCidade($estabelecimento) {
+    public static function addEstabelecimento($estabelecimento) {
         $connection = Connection::getConnection();
         $sql = "INSERT INTO serasa_estabelecimentos (nome,cidades_id) VALUES ('$estabelecimento->nome',$estabelecimento->cidades_id) ";
         $result = mysqli_query($connection, $sql);
