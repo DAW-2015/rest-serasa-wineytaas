@@ -57,3 +57,32 @@
     2. body: NULL
     3. return: **Cidade excluída**, caso true. **Erro ao excluir cidade**, case false
     
+
+##Cliente
+
+
+1.  `GET /cidades/:id`
+    1. parametro: **id** da cidade desejada
+    2. body: NULL
+    3. return: O **id**, o **nome** , o **estados_id** e o **nome_estado** da cidade selecionada
+
+2.  `GET /cidades`
+    1. parametro: NULL
+    2. body: NULL
+    3. return: Os **id**, os **nome**, os **estados_id** e os **nome_estado**  de todas as cidades
+
+3.  `POST /cidades`
+    1. parametro: NULL
+    2. body: { "cpf": "CPF_CLIENETE", "nome": "NOME_CLIENTE", "cidades_id":"CIDADE_ID_CLIENTE"}
+    3. return: Os dados do cliente que foi adicionado **id**, **cpf**, **nome**, **cidade** (**id** , **nome**, **estados_id** )
+
+4.  `PUT /cidades/:id`
+    1. parametro: **id** do estado desejado
+    2. body: { "nome": "NOME_CIDADE" , "estado_id" : "ID_ESTADO"}
+    3. return: O **id**, o **nome** , o **estados_id** e o **nome_estado** atualizados da cidade
+
+5.  `DELETE /cidades/:id`
+    1. parametro: **id** da cidade desejada
+    2. body: NULL
+    3. return: **Cidade excluída**, caso true. **Erro ao excluir cidade**, case false
+    
