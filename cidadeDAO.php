@@ -56,7 +56,7 @@ class CidadeDAO
 
   public static function addCidade($cidade) {
     $connection = Connection::getConnection();
-    $sql = "INSERT INTO serasa_cidades (nome) VALUES ('$cidade->nome')";
+    $sql = "INSERT INTO serasa_cidades (nome,estados_id) VALUES ('$cidade->nome',$cidade->estado_id) ";
     $result  = mysqli_query($connection, $sql);
     if ($result === FALSE) {
       return false;
