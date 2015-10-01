@@ -73,13 +73,13 @@
 
 3.  `POST /cidades`
     1. parametro: NULL
-    2. body: { "cpf": "CPF_CLIENETE", "nome": "NOME_CLIENTE", "cidades_id":"CIDADE_ID_CLIENTE"}
+    2. body: { "cpf": "CPF_CLIENETE", "nome": "NOME_CLIENTE", "cidades_id":"CIDADE_ID_CLIENTE" }
     3. return: Os dados do cliente que foi adicionado **id**, **cpf**, **nome**, **cidade** (**id** , **nome**, **estados_id** )
 
 4.  `PUT /cidades/:id`
-    1. parametro: **id** do estado desejado
-    2. body: { "nome": "NOME_CIDADE" , "estado_id" : "ID_ESTADO"}
-    3. return: O **id**, o **nome** , o **estados_id** e o **nome_estado** atualizados da cidade
+    1. parametro: **id** do cliente desejado
+    2. body: { "cpf": "CPF_CLIENETE", "nome": "NOME_CLIENTE", "cidades_id":"CIDADE_ID_CLIENTE" }
+    3. return:  Os dados do cliente que foi atualizado **id**, **cpf**, **nome**, **cidade** (**id** , **nome**, **estados_id** )
 
 5.  `DELETE /cidades/:id`
     1. parametro: **id** da cidade desejada
