@@ -5,8 +5,10 @@ require 'Slim/Slim.php';
 
 require 'connection.php';
 require 'clienteDAO.php';
-require 'estadoDAO.php';
+require 'dividaDAO.php';
 require 'estabelecimentoDAO.php';
+require 'estadoDAO.php';
+
 
 $app = new \Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
@@ -211,6 +213,81 @@ $app->delete('/estabelecimentos/:id', function($id) {
         echo "{'message':'Estabelecimento excluído'}";
     } else {
         echo "{'message':'Erro ao excluir estabelecimento'}";
+    }
+});
+
+//----------------------DIVIDAS---------------------------------
+
+$app->get('/dividas/clientes/:id', function ($id) {
+    //recupera o -=
+    $divida = DividaDAO::getDividaByClienteID($id);
+    echo json_encode($divida);
+});
+
+$app->get('/dividas/estabelecimentos/:id', function ($id) {
+    //recupera o -=
+    $divida = DividaDAO::getDividaByEstabelecimentoID($id);
+    echo json_encode($divida);
+});
+
+$app->get('/dividas', function() {
+    // recupera todos os dividas
+    $dividas = DividaDAO::getAll();
+    echo json_encode($dividas);
+});
+
+$app->post('/dividas', function() {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // insere o divida
+    $novoDivida = json_decode($request->getBody());
+    $isAdd = DividaDAO::addDivida($novoDivida);
+    
+    if ($isAdd) {
+        echo "{'message':'Divida Adicionado'}";
+    } else {
+        echo "{'message':'Erro ao adicionar divida'}";
+    }
+});
+
+$app->put('/dividas', function ($id) {
+    // recupera o request
+    $request = \Slim\Slim::getInstance()->request();
+
+    // atualiza o divida
+    $divida = json_decode($request->getBody());
+    $divida = DividaDAO::updateDivida($divida, $id);
+
+    echo json_encode($divida);
+});
+
+$app->delete('/dividas/:id', function($id) {
+    // exclui o divida
+    $isDeleted = DividaDAO::deleteDivida($id);
+
+    // verifica se houve problema na exclusão
+    if ($isDeleted) {
+        echo "{'message':'Divida excluído'}";
+    } else {
+        echo "{'message':'Erro ao excluir divida'}";
+    }
+});
+
+
+$app->delete('/dividas/', function($clientes_id,$estabelecimentos_id) {
+    // exclui o divida
+    $request = \Slim\Slim::getInstance()->request();
+
+    // atualiza o divida
+    $divida = json_decode($request->getBody());
+    $isDeleted = DividaDAO::deleteDivida($divida);
+
+    // verifica se houve problema na exclusão
+    if ($isDeleted) {
+        echo "{'message':'Divida excluído'}";
+    } else {
+        echo "{'message':'Erro ao excluir divida'}";
     }
 });
 

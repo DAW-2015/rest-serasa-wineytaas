@@ -89,7 +89,7 @@
 ##Estabelecimento
 
 
-1.  `GET /estabelecimentos/:cpf`
+1.  `GET /estabelecimentos/:id`
     1. parametro: **id** do estabelecimento desejado
     2. body: NULL
     3. return: Os dados do estabelecimento **id** , **nome** , **cidade** (**id** , **nome**, **estados_id** )
@@ -110,6 +110,39 @@
     3. return:  Os dados do estabelecimento que foi atualizado **id** , **nome** , **cidade** (**id** , **nome**, **estados_id** )
 
 5.  `DELETE /estabelecimentos/:id`
+    1. parametro: **id** do cliente desejado
+    2. body: NULL
+    3. return: **Estabelecimento excluído**, caso true. **Erro ao excluir estabelecimento**, case false
+ 
+##Divida
+
+
+1.  `GET /dividas/clientes/:id`
+    1. parametro: **id** do cliente desejado
+    2. body: NULL
+    3. return: Os estabelecimento em que o cliente esta devendo **clientes_id** , **estabelecimentos_id** , **valor**
+
+1.  `GET /dividas/estabelecimento/:id`
+    1. parametro: **id** do estabelecimento desejado
+    2. body: NULL
+    3. return: Os clientes que estão devendo ao estabelecimento **clientes_id** , **estabelecimentos_id** , **valor**
+
+2.  `GET /dividas`
+    1. parametro: NULL
+    2. body: NULL
+    3. return: Os dados de todas as dividas **clientes_id** , **estabelecimentos_id** , **valor**
+
+3.  `POST /dividas`
+    1. parametro: NULL
+    2. body: { "clientes_id": "CLIENTE_ID", "estabelecimentos_id":"EESTABELECIMENTO_ID", "valor":"VALOR_COM_PONTO" }
+    3. return: **Divida Adicionado**, true. **Erro ao adicionar divida**, false.
+
+4.  `PUT /dividas`
+    1. parametro: NULL
+    2. body: { "clientes_id": "CLIENTE_ID", "estabelecimentos_id":"EESTABELECIMENTO_ID", "valor":"VALOR_COM_PONTO" }
+    3. return:  Os dados atualizados da divida **clientes_id** , **estabelecimentos_id** , **valor**
+
+5.  `DELETE /dividas/:id`
     1. parametro: **id** do cliente desejado
     2. body: NULL
     3. return: **Estabelecimento excluído**, caso true. **Erro ao excluir estabelecimento**, case false
