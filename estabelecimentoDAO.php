@@ -1,50 +1,50 @@
 <?php
 
-class CidadeDAO {
+class estabelecimentoDAO {
 
-    public static function getCidadeByID($id) {
+    public static function getEstabelecimentoByID($id) {
         $connection = Connection::getConnection();
-        $sql = "SELECT * FROM serasa_cidades WHERE id=$id";
+        $sql = "SELECT * FROM serasa_estabelecimentos WHERE id=$id";
         $result = mysqli_query($connection, $sql);
-        $cidade = mysqli_fetch_object($result);
+        $estabelecimento = mysqli_fetch_object($result);
 
-        $sql = "SELECT * FROM serasa_estados WHERE id=$cidade->estados_id";
+        $sql = "SELECT * FROM serasa_cidades WHERE id=$estabelecimento->cidades_id";
         $result = mysqli_query($connection, $sql);
-        $cidade->nome_estado = mysqli_fetch_object($result)->nome;
+        $estabelecimento->nome_cidade = mysqli_fetch_object($result)->nome;
 
-        return $cidade;
+        return $estabelecimento;
     }
 
     public static function getAll() {
         $connection = Connection::getConnection();
-        $sql = "SELECT * FROM serasa_cidades";
+        $sql = "SELECT * FROM serasa_estabelecimentos";
 
-        // recupera todos os cidades
+        // recupera todos os estabelecimentos
         $result = mysqli_query($connection, $sql);
-        $cidades = array();
-        while ($cidade = mysqli_fetch_object($result)) {
-            if ($cidade != null) {
-                $sql = "SELECT * FROM serasa_estados WHERE id=$cidade->estados_id";
+        $estabelecimentos = array();
+        while ($estabelecimento = mysqli_fetch_object($result)) {
+            if ($estabelecimento != null) {
+                $sql = "SELECT * FROM serasa_cidades WHERE id=$estabelecimento->cidades_id";
                 $result = mysqli_query($connection, $sql);
-                $cidade->nome_estado = mysqli_fetch_object($result)->nome;
-                $cidades[] = $cidade;
+                $estabelecimento->nome_cidade = mysqli_fetch_object($result)->nome;
+                $estabelecimentos[] = $estabelecimento;
             }
         }
-        return $cidades;
+        return $estabelecimentos;
     }
 
-    public static function updateCidade($cidade, $id) {
+    public static function updateCidade($estabelecimento, $id) {
         $connection = Connection::getConnection();
-        $sql = "UPDATE serasa_cidades SET nome='$cidade->nome', estado_id='$cidade->estado_id' WHERE id=$id";
+        $sql = "UPDATE serasa_estabelecimentos SET nome='$estabelecimento->nome', estado_id='$estabelecimento->cidades_id' WHERE id=$id";
         $result = mysqli_query($connection, $sql);
 
-        $cidadeAtualizado = CidadeDAO::getCidadeByID($id);
-        return $cidadeAtualizado;
+        $estabelecimentoAtualizado = CidadeDAO::getCidadeByID($id);
+        return $estabelecimentoAtualizado;
     }
 
     public static function deleteCidade($id) {
         $connection = Connection::getConnection();
-        $sql = "DELETE FROM serasa_cidades WHERE id=$id";
+        $sql = "DELETE FROM serasa_estabelecimentos WHERE id=$id";
         $result = mysqli_query($connection, $sql);
 
         if ($result === FALSE) {
@@ -54,9 +54,9 @@ class CidadeDAO {
         }
     }
 
-    public static function addCidade($cidade) {
+    public static function addCidade($estabelecimento) {
         $connection = Connection::getConnection();
-        $sql = "INSERT INTO serasa_cidades (nome,estados_id) VALUES ('$cidade->nome',$cidade->estado_id) ";
+        $sql = "INSERT INTO serasa_estabelecimentos (nome,cidades_id) VALUES ('$estabelecimento->nome',$estabelecimento->cidades_id) ";
         $result = mysqli_query($connection, $sql);
         if ($result === FALSE) {
             return false;

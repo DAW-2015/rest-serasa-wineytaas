@@ -6,6 +6,7 @@ require 'Slim/Slim.php';
 require 'connection.php';
 require 'clienteDAO.php';
 require 'estadoDAO.php';
+require 'estabelecimentoDAO.php';
 
 $app = new \Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
