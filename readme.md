@@ -84,5 +84,5 @@
 5.  `DELETE /clientes/:id`
     1. parametro: **id** da cidade desejada
     2. body: NULL
-    3. return: **Cidade excluída**, caso true. **Erro ao excluir cidade**, case false
+    3. return: **Cliente excluído**, caso true. **Erro ao excluir cliente**, case false
     
