@@ -35,8 +35,8 @@ class EstadoDAO
     $connection = Connection::getConnection();
     $sql = "UPDATE estados SET nome='$estado->nome' WHERE id=$id";
     $result  = mysqli_query($connection, $sql);
-
-    $estadoAtualizado = EstadoDAO::getEstadoByID($estado->id);
+    
+    $estadoAtualizado = EstadoDAO::getEstadoByID($id);
     return $estadoAtualizado;
   }
 
@@ -58,8 +58,10 @@ class EstadoDAO
     $connection = Connection::getConnection();
     $sql = "INSERT INTO estados (nome) VALUES ('$estado->nome')";
     $result  = mysqli_query($connection, $sql);
-
-    $novoEstado = EstadoDAO::getEstadoByID($estado->id);
-    return $novoEstado;
+    if ($result === FALSE) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
