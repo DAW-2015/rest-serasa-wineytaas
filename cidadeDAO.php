@@ -43,7 +43,7 @@ class CidadeDAO
 
   public static function deleteCidade($id) {
     $connection = Connection::getConnection();
-    $sql = "DELETE FROM serasa_estados WHERE id=$id";
+    $sql = "DELETE FROM serasa_cidades WHERE id=$id";
     $result  = mysqli_query($connection, $sql);
 
     if ($result === FALSE) {
@@ -54,9 +54,9 @@ class CidadeDAO
   }
 
 
-  public static function addCidade($estado) {
+  public static function addCidade($cidade) {
     $connection = Connection::getConnection();
-    $sql = "INSERT INTO serasa_estados (nome) VALUES ('$estado->nome')";
+    $sql = "INSERT INTO serasa_cidades (nome) VALUES ('$cidade->nome')";
     $result  = mysqli_query($connection, $sql);
     if ($result === FALSE) {
       return false;
