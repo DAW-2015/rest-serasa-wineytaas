@@ -275,13 +275,12 @@ $app->delete('/dividas/:id', function($id) {
 });
 
 
-$app->delete('/dividas/', function($clientes_id,$estabelecimentos_id) {
+$app->delete('/dividas/:clientes_id/:estabelecimentos_id', function($clientes_id,$estabelecimentos_id) {
+    echo"Estabelecimentos_id: ".$estabelecimentos_id."     index</br>";
+    echo"Clientes_id: ".$clientes_id."     index</br>";
     // exclui o divida
     $request = \Slim\Slim::getInstance()->request();
-
-    // atualiza o divida
-    $divida = json_decode($request->getBody());
-    $isDeleted = DividaDAO::deleteDivida($divida);
+    $isDeleted = DividaDAO::deleteDivida($clientes_id,$estabelecimentos_id);
 
     // verifica se houve problema na exclusão
     if ($isDeleted) {

@@ -139,11 +139,11 @@
 
 4.  `PUT /dividas`
     1. parametro: NULL
-    2. body: { "clientes_id": "CLIENTE_ID", "estabelecimentos_id":"EESTABELECIMENTO_ID", "valor":"VALOR_COM_PONTO" }
+    2. body: { "clientes_id": "CLIENTE_ID", "estabelecimentos_id":"ESTABELECIMENTO_ID", "valor":"VALOR_COM_PONTO" }
     3. return:  Os dados atualizados da divida **clientes_id** , **estabelecimentos_id** , **valor**
 
-5.  `DELETE /dividas/:id`
-    1. parametro: **id** do cliente desejado
+5.  `DELETE /dividas/:clientes_id/:estabelecimentos_id`
+    1. parametro: **clientes_id** do cliente desejado juntamente ao **estabelecimentos_id** desejado
     2. body: NULL
-    3. return: **Estabelecimento excluído**, caso true. **Erro ao excluir estabelecimento**, case false
+    3. return: **Divida excluída**, caso true. **Erro ao excluir divida**, case false
     

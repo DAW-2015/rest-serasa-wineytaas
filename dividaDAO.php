@@ -66,9 +66,11 @@ class DividaDAO {
 //        }
 //    }
     
-    public static function deleteDivida($divida) {
+    public static function deleteDivida($clientes_id,$estabelecimentos_id) {
         $connection = Connection::getConnection();
-        $sql = "DELETE FROM serasa_dividas WHERE clientes_id=$divida->clientes_id AND estabelecimentos_id=$divida->estabelecimentos_id";
+        echo"Estabelecimentos_id: ".$estabelecimentos_id."     delete</br>";
+    echo"Clientes_id: ".$clientes_id."     delete</br>";
+        $sql = "DELETE FROM serasa_dividas WHERE clientes_id=$clientes_id AND estabelecimentos_id=$estabelecimentos_id";
         $result = mysqli_query($connection, $sql);
 
         if ($result === FALSE) {
